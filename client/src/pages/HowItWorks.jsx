@@ -5,7 +5,7 @@ import { Utensils, ShieldCheck, KeyRound, MapPin, CheckCircle2, ArrowRight, File
 export default function HowItWorks() {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
-      
+
       {/* Header */}
       <div className="text-center max-w-3xl mx-auto space-y-4">
         <span className="text-xs font-bold uppercase tracking-widest text-emerald-400 bg-emerald-500/10 px-3 py-1 rounded-full border border-emerald-500/20">
@@ -21,7 +21,7 @@ export default function HowItWorks() {
 
       {/* 4 Step Visual Diagram */}
       <div className="space-y-12">
-        
+
         {/* Step 1 */}
         <div className="glass-panel p-8 sm:p-10 rounded-3xl border border-slate-800 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           <div className="lg:col-span-1 flex justify-center">
@@ -36,13 +36,13 @@ export default function HowItWorks() {
               Donors input food details (servings count, dish title, storage conditions), shelf life expiry window (hours remaining), photo upload, and pinpoint pickup address map coordinates.
             </p>
           </div>
-          <div className="lg:col-span-4 bg-slate-900/80 p-5 rounded-2xl border border-slate-800 text-xs font-mono text-emerald-300 space-y-1">
+          {/* <div className="lg:col-span-4 bg-slate-900/80 p-5 rounded-2xl border border-slate-800 text-xs font-mono text-emerald-300 space-y-1">
             <div className="text-slate-400 uppercase font-bold text-[10px]">Data Payload</div>
             <div>food_type: "Cooked Meals"</div>
             <div>serves: 120</div>
             <div>storage: "Refrigerated (4°C)"</div>
             <div>fssai_license: "10019011000123"</div>
-          </div>
+          </div> */}
         </div>
 
         {/* Step 2 */}
@@ -59,12 +59,12 @@ export default function HowItWorks() {
               Verified recipient NGOs within distance radius browse active food listings on live map, evaluate urgency, and click "Claim Food Listing", instantly locking the allocation.
             </p>
           </div>
-          <div className="lg:col-span-4 bg-slate-900/80 p-5 rounded-2xl border border-slate-800 text-xs font-mono text-teal-300 space-y-1">
+          {/* <div className="lg:col-span-4 bg-slate-900/80 p-5 rounded-2xl border border-slate-800 text-xs font-mono text-teal-300 space-y-1">
             <div className="text-slate-400 uppercase font-bold text-[10px]">Engine Action</div>
             <div>2dsphere Index: Matched (1.4 km)</div>
             <div>Socket Broadcast: order:claimed</div>
             <div>Status: "pending"</div>
-          </div>
+          </div> */}
         </div>
 
         {/* Step 3 */}
@@ -81,12 +81,12 @@ export default function HowItWorks() {
               The NGO receives a secret 4-6 digit numeric OTP. Upon arriving at the donor's kitchen, the NGO driver presents the code. Donor enters OTP into portal to verify physical handover.
             </p>
           </div>
-          <div className="lg:col-span-4 bg-slate-900/80 p-5 rounded-2xl border border-slate-800 text-xs font-mono text-amber-300 space-y-1">
+          {/* <div className="lg:col-span-4 bg-slate-900/80 p-5 rounded-2xl border border-slate-800 text-xs font-mono text-amber-300 space-y-1">
             <div className="text-slate-400 uppercase font-bold text-[10px]">OTP Verification</div>
             <div>secret_otp: "482910"</div>
             <div>POST /api/orders/verify-otp</div>
             <div>Result: 200 OK (Delivered)</div>
-          </div>
+          </div> */}
         </div>
 
         {/* Step 4 */}
@@ -103,12 +103,12 @@ export default function HowItWorks() {
               Once OTP is verified, an official Tax Exemption Certificate and PDF contribution receipt is generated automatically for download.
             </p>
           </div>
-          <div className="lg:col-span-4 bg-slate-900/80 p-5 rounded-2xl border border-slate-800 text-xs font-mono text-purple-300 space-y-1">
+          {/* <div className="lg:col-span-4 bg-slate-900/80 p-5 rounded-2xl border border-slate-800 text-xs font-mono text-purple-300 space-y-1">
             <div className="text-slate-400 uppercase font-bold text-[10px]">Document Output</div>
             <div>format: "PDF Document"</div>
             <div>tax_deductible: true</div>
             <div>co2_saved_kg: 120</div>
-          </div>
+          </div> */}
         </div>
 
       </div>
