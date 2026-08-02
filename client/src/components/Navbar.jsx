@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { useTheme } from '../context/ThemeContext';
 import {
   Utensils,
   Heart,
   LayoutDashboard,
-  Mic,
   LogOut,
   LogIn,
   UserPlus,
@@ -14,11 +14,15 @@ import {
   X,
   CheckCircle2,
   MapPin,
-  FileCheck
+  FileCheck,
+  Sun,
+  Moon,
+  Info
 } from 'lucide-react';
 
 export default function Navbar() {
   const { user, isAuthenticated, logout } = useAuth();
+  const { theme, toggleTheme } = useTheme();
   const navigate = useNavigate();
   const location = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -26,7 +30,7 @@ export default function Navbar() {
   const isActive = (path) => location.pathname === path;
 
   return (
-    <nav className="sticky top-0 z-50 glass-panel border-b border-slate-800/80 backdrop-blur-md">
+    <nav className="sticky top-0 z-50 glass-panel border-b border-slate-800/80 backdrop-blur-md transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
 
@@ -38,7 +42,7 @@ export default function Navbar() {
               </div>
             </div>
             <div>
-              <span className="text-2xl font-extrabold tracking-tight text-white flex items-center">
+              <span className="text-2xl font-extrabold tracking-tight flex items-center">
                 Re<span className="gradient-text">-Serve</span>
               </span>
               <span className="text-[10px] tracking-widest uppercase font-semibold text-emerald-400 block -mt-1">
@@ -51,15 +55,29 @@ export default function Navbar() {
           <div className="hidden md:flex items-center space-x-1 lg:space-x-2">
             <Link
               to="/"
-              className={`px-3 py-2 rounded-xl text-sm font-medium transition-colors ${isActive('/') ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' : 'text-slate-300 hover:text-white hover:bg-slate-800/50'
+              className={`px-3.5 py-2 rounded-xl text-sm font-semibold transition-colors ${isActive('/')
+                  ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'
+                  : 'text-slate-300 hover:text-white hover:bg-slate-800/50'
                 }`}
             >
               Home
             </Link>
 
             <Link
+              to="/about"
+              className={`px-3.5 py-2 rounded-xl text-sm font-semibold transition-colors ${isActive('/about')
+                  ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'
+                  : 'text-slate-300 hover:text-white hover:bg-slate-800/50'
+                }`}
+            >
+              About Us
+            </Link>
+
+            <Link
               to="/food-listing"
-              className={`px-3 py-2 rounded-xl text-sm font-medium transition-colors ${isActive('/food-listing') ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' : 'text-slate-300 hover:text-white hover:bg-slate-800/50'
+              className={`px-3.5 py-2 rounded-xl text-sm font-semibold transition-colors ${isActive('/food-listing')
+                  ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'
+                  : 'text-slate-300 hover:text-white hover:bg-slate-800/50'
                 }`}
             >
               Food Feed
@@ -67,7 +85,9 @@ export default function Navbar() {
 
             <Link
               to="/features"
-              className={`px-3 py-2 rounded-xl text-sm font-medium transition-colors ${isActive('/features') ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' : 'text-slate-300 hover:text-white hover:bg-slate-800/50'
+              className={`px-3.5 py-2 rounded-xl text-sm font-semibold transition-colors ${isActive('/features')
+                  ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'
+                  : 'text-slate-300 hover:text-white hover:bg-slate-800/50'
                 }`}
             >
               Features
@@ -75,19 +95,26 @@ export default function Navbar() {
 
             <Link
               to="/how-it-works"
-              className={`px-3 py-2 rounded-xl text-sm font-medium transition-colors ${isActive('/how-it-works') ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' : 'text-slate-300 hover:text-white hover:bg-slate-800/50'
+              className={`px-3.5 py-2 rounded-xl text-sm font-semibold transition-colors ${isActive('/how-it-works')
+                  ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'
+                  : 'text-slate-300 hover:text-white hover:bg-slate-800/50'
                 }`}
             >
               How It Works
             </Link>
 
-            <Link
-              to="/speech"
-              className="px-3 py-2 rounded-xl text-sm font-medium text-teal-300 hover:bg-teal-500/10 border border-teal-500/30 flex items-center space-x-1.5 transition-all"
+            {/* LIGHT / DARK MODE TOGGLE BUTTON */}
+            {/* <button
+              onClick={toggleTheme}
+              title={theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+              className="p-2.5 rounded-xl border border-slate-700/60 hover:bg-slate-800/50 transition-all flex items-center justify-center space-x-1.5 ml-2"
             >
-              <Mic className="w-4 h-4 text-teal-400 animate-pulse" />
-              <span>Voice AI</span>
-            </Link>
+              {theme === 'dark' ? (
+                <Sun className="w-4 h-4 text-amber-400" />
+              ) : (
+                <Moon className="w-4 h-4 text-indigo-600" />
+              )}
+            </button> */}
           </div>
 
           {/* User Auth Controls & Role Badges */}
@@ -96,7 +123,7 @@ export default function Navbar() {
               <div className="flex items-center space-x-3">
                 <Link
                   to={user?.role === 'donor' ? '/donor-dashboard' : user?.role === 'ngo' ? '/ngo-dashboard' : '/dashboard'}
-                  className="flex items-center space-x-2 px-4 py-2 rounded-xl bg-slate-800/80 hover:bg-slate-700/80 border border-slate-700/80 text-sm font-medium text-emerald-400 transition-all"
+                  className="flex items-center space-x-2 px-4 py-2 rounded-xl bg-slate-800/80 hover:bg-slate-700/80 border border-slate-700/80 text-sm font-semibold text-emerald-400 transition-all"
                 >
                   <LayoutDashboard className="w-4 h-4 text-emerald-400" />
                   <span>Dashboard</span>
@@ -130,7 +157,7 @@ export default function Navbar() {
               <div className="flex items-center space-x-2">
                 <Link
                   to="/login"
-                  className="px-4 py-2 rounded-xl text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800/80 transition-all flex items-center space-x-1"
+                  className="px-4 py-2 rounded-xl text-sm font-semibold text-slate-300 hover:text-white hover:bg-slate-800/80 transition-all flex items-center space-x-1"
                 >
                   <LogIn className="w-4 h-4" />
                   <span>Login</span>
@@ -149,12 +176,12 @@ export default function Navbar() {
 
           {/* Mobile Menu Button */}
           <div className="md:hidden flex items-center space-x-2">
-            <Link
-              to="/speech"
-              className="p-2 rounded-xl bg-teal-500/10 border border-teal-500/30 text-teal-400"
+            <button
+              onClick={toggleTheme}
+              className="p-2 rounded-xl border border-slate-800 text-slate-300"
             >
-              <Mic className="w-5 h-5 animate-pulse" />
-            </Link>
+              {theme === 'dark' ? <Sun className="w-5 h-5 text-amber-400" /> : <Moon className="w-5 h-5 text-indigo-600" />}
+            </button>
 
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -172,28 +199,35 @@ export default function Navbar() {
           <Link
             to="/"
             onClick={() => setMobileMenuOpen(false)}
-            className="block px-3 py-2 rounded-xl text-base font-medium text-slate-200 hover:bg-slate-800"
+            className="block px-3 py-2 rounded-xl text-base font-semibold text-slate-200 hover:bg-slate-800"
           >
             Home
           </Link>
           <Link
+            to="/about"
+            onClick={() => setMobileMenuOpen(false)}
+            className="block px-3 py-2 rounded-xl text-base font-semibold text-slate-200 hover:bg-slate-800"
+          >
+            About Us
+          </Link>
+          <Link
             to="/food-listing"
             onClick={() => setMobileMenuOpen(false)}
-            className="block px-3 py-2 rounded-xl text-base font-medium text-slate-200 hover:bg-slate-800"
+            className="block px-3 py-2 rounded-xl text-base font-semibold text-slate-200 hover:bg-slate-800"
           >
             Food Feed
           </Link>
           <Link
             to="/features"
             onClick={() => setMobileMenuOpen(false)}
-            className="block px-3 py-2 rounded-xl text-base font-medium text-slate-200 hover:bg-slate-800"
+            className="block px-3 py-2 rounded-xl text-base font-semibold text-slate-200 hover:bg-slate-800"
           >
             Features
           </Link>
           <Link
             to="/how-it-works"
             onClick={() => setMobileMenuOpen(false)}
-            className="block px-3 py-2 rounded-xl text-base font-medium text-slate-200 hover:bg-slate-800"
+            className="block px-3 py-2 rounded-xl text-base font-semibold text-slate-200 hover:bg-slate-800"
           >
             How It Works
           </Link>
@@ -204,7 +238,7 @@ export default function Navbar() {
                 <Link
                   to={user?.role === 'donor' ? '/donor-dashboard' : '/ngo-dashboard'}
                   onClick={() => setMobileMenuOpen(false)}
-                  className="block px-3 py-2 rounded-xl text-base font-medium text-emerald-400 bg-emerald-500/10 border border-emerald-500/20"
+                  className="block px-3 py-2 rounded-xl text-base font-semibold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20"
                 >
                   My Dashboard ({user?.role?.toUpperCase()})
                 </Link>
@@ -212,7 +246,7 @@ export default function Navbar() {
                   <Link
                     to="/donate"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="block px-3 py-2 rounded-xl text-base font-medium text-white gradient-btn text-center"
+                    className="block px-3 py-2 rounded-xl text-base font-semibold text-white gradient-btn text-center"
                   >
                     + Donate Food Now
                   </Link>
@@ -223,7 +257,7 @@ export default function Navbar() {
                     logout();
                     navigate('/sign-out');
                   }}
-                  className="w-full text-left px-3 py-2 rounded-xl text-base font-medium text-red-400 hover:bg-red-500/10"
+                  className="w-full text-left px-3 py-2 rounded-xl text-base font-semibold text-red-400 hover:bg-red-500/10"
                 >
                   Sign Out
                 </button>
@@ -240,7 +274,7 @@ export default function Navbar() {
                 <Link
                   to="/register"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="text-center px-4 py-2.5 rounded-xl gradient-btn text-sm font-semibold"
+                  className="text-center px-4 py-2.5 rounded-xl gradient-btn text-sm font-semibold text-white"
                 >
                   Register
                 </Link>
